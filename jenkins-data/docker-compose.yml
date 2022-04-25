@@ -9,6 +9,13 @@ services:
       - "/home/tupi/jenkins/jenkins-data/jenkins_home:/var/jenkins_home:z"
     networks:
       - net-jenkins
+  remote-host:
+    container_name: remote-container
+    image: remote-host:latest
+    build:
+      context: centos7
+    networks:
+      - net-jenkins
 networks:
   net-jenkins:
 
