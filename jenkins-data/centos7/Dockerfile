@@ -8,14 +8,19 @@ RUN yum -y install openssh-server
 #    chmod 700 /home/remote_user/.ssh
 
 RUN useradd remote_user && \
-    echo "remote_user:1234" | chpasswd && \
-    mkdir /home/remote_user/.ssh && \
+    echo "remote_user:1234" | chpasswd 
+    
+USER remote_user
+RUN mkdir /home/remote_user/.ssh && \
     chmod 700 /home/remote_user/.ssh
 
 COPY remote-key.pub /home/remote_user/.ssh/authorized_keys
 
+
+USER root
 RUN chown remote_user:remote_user -R /home/remote_user/.ssh/authorized_keys && \
     chmod 600 /home/remote_user/.ssh/authorized_keys
+
 
 RUN ssh-keygen -A
 CMD  /usr/sbin/sshd -D 
