@@ -28,7 +28,7 @@ RUN chown remote_user:remote_user -R /home/remote_user/.ssh/authorized_keys && \
 # RUN cd /usr/src/Python-3.7.11 && ./configure && make altinstall
 # RUN rm -rf /usr/src/Python-3.7.11.tgz
 
-
+# Deprecation Notice with python 2.7 
 RUN curl -O  https://bootstrap.pypa.io/pip/2.7/get-pip.py && \
     python get-pip.py && \
     pip install awscli --upgrade
